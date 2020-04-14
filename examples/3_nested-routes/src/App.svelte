@@ -30,7 +30,6 @@
     -->
     <Route path="/" exact={true} component={Home} />
     <Route path="/landing" let:match>
-      {match}
       <h1>Landing page</h1>
       <Link to="/landing/article-1">Article 1</Link>
       <Link to="/landing/article-2">Article 2</Link>
