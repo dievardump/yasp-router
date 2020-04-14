@@ -1,5 +1,6 @@
 <script>
-  import { Router, Route, Link } from "yasp-router";
+  import { Router, Route, Link, configure } from "yasp-router";
+  configure({ useHash: true });
 </script>
 
 <style>
