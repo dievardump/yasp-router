@@ -1,6 +1,6 @@
 {
   "name": "yasp-router",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Yet Another Svelte Package: Router",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
