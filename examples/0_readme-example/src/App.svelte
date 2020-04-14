@@ -1,5 +1,5 @@
 <script>
-  import { Router, Route, Link } from "../../../src/index.js";
+  import { Router, Route, Link } from "yasp-router";
 </script>
 
 <style>

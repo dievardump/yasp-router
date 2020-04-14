@@ -7,6 +7,10 @@
   "svelte": "src/index.js",
   "author": "Simon Fremaux / dievardump <dievardump@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dievardump/yasp-router/issues"
+  },
+  "homepage": "https://github.com/dievardump/yasp-router",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",

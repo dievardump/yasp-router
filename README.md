@@ -102,7 +102,7 @@ Methods:
 
 ### `<Link ({to:string} or {route:string} or {action:string}) {params?:object} {navigateOptions?:object}>`
 
-> Either {to} or {route} must be defined. At least one of them and ONLY one of them. After the component instantiation, those can't change, only {params} can
+> Either {to}, {route} or {action} must be defined. At least one of them and ONLY one of them.
 
 When a link is active, it will have two html properties (`aria-current="page"` and `data-active="active"`) that you can use to target this element for styling
 

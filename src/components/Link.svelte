@@ -12,7 +12,7 @@
 
   let setted = 0;
   ["to", "route", "action"].forEach(name => {
-    if (!!$props[name]) setted++;
+    if (!!$$props[name]) setted++;
   });
 
   if (setted < 1) {
