@@ -19,9 +19,9 @@ Router for Svelte 3
 
 > npm install --save-dev yasp-router
 
-## Examples
+## Very quick example
 
-### very quick example
+View live there : https://svelte.dev/repl/59f64208d7584e918749ddc4c6094af6?version=3.20.1
 
 ```html
 <script>
@@ -36,6 +36,7 @@ Router for Svelte 3
 </style>
 
 <Link to="/">Home</Link>
+<!-- link to route by its name -->
 <Link route="landing">Landing Page</Link>
 <Link route="about">About</Link>
 <main>
@@ -61,28 +62,6 @@ Router for Svelte 3
 </main>
 
 ```
-
-### Shipped with this package
-
-The directory `examples` contains examples of different usage of this package. To list some :
-
-- Simple Routing (URI or Hash)
-- Route Nesting
-- Routes with parameters
-- Named routes
-- ...
-
-The best way to test those is to clone this repository and launch the examples directory's server that's in it
-
-```
-git clone git@gitlab.com:dievardump/yasp-router.git
-cd yasp-router
-npm install
-cd examples
-npm run dev
-```
-
-This should create a local server accessible to http://localhost:3333 (if you kept the default port)
 
 ## Components & methods
 
@@ -225,6 +204,27 @@ Navigates to the given href and triggers the Routes matching process.
 ### `goToPath(path:string, params?:object, options?:object)`
 
 Construct a new href using path and params, then calls `goTo(href, options)`.
+
+## Other examples Shipped with this package
+
+The directory `examples` contains examples of different usage of this package. To list some :
+
+- Simple Routing (URI or Hash)
+- Route Nesting
+- Routes with parameters
+- Named routes
+- ...
+
+The best way to test those is to clone this repository and launch the examples directory's server that's in it
+
+```
+git clone git@gitlab.com:dievardump/yasp-router.git
+cd yasp-router/examples
+npm install
+npm run dev
+```
+
+This should create a local server accessible to http://localhost:3333 (if you kept the default port)
 
 ## Author
 
