@@ -224,7 +224,7 @@ function registerLink(to, params, route) {
     if (route) {
       const index = namedRoutes[route].links.indexOf(link);
       if (index !== -1) {
-        namedRoutes.links.splice(index, 1);
+        namedRoutes[route].links.splice(index, 1);
       }
     }
   });
