@@ -32,6 +32,11 @@ export default class Route {
    * also returns params if there are
    */
   test(path) {
+    // force trailing slash, as it is forced on all routes and links paths
+    if (path === '#') {
+      path = '#/';
+    }
+
     // if the route match
     const match = this.parser(path);
     if (match) {
