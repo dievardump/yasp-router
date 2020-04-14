@@ -1,5 +1,5 @@
 import { pathToRegexp, compile } from 'path-to-regexp';
-import { parse } from 'query-string';
+import queryString from 'query-string';
 
 /**
  * routeParser
@@ -75,7 +75,7 @@ function getLocationInfos() {
   // @TODO: change to make it SSR friendly?!
   const pathname = location.pathname;
   const hash = location.hash || '#'; // if hash === ''
-  const query = parse(location.search || '');
+  const query = queryString.parse(location.search || '');
 
   return {
     pathname,
