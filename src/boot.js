@@ -82,7 +82,9 @@ function gotoPath(path, params = {}, options = {}) {
 
 // change browser location to href
 function goto(href, options = {}) {
-  if (history && !options.reload) {
+  if (href[0] === '#') {
+    document.location.hash = href;
+  } else if (history && !options.reload) {
     // else check if we can play with history
     if (options.replaceState) {
       history.replaceState({ page: href }, '', href);
@@ -90,14 +92,15 @@ function goto(href, options = {}) {
       history.pushState({ page: href }, '', href);
     }
 
-    if (options.scrollToTop) {
-      window.scrollTo(0, 0);
-    }
-
     onStateChanged();
   } else {
     // else go to page the hard way
-    location.href = href;
+    document.location.href = href;
+    return;
+  }
+
+  if (options.scrollToTop) {
+    window.scrollTo(0, 0);
   }
 }
 
