@@ -46,5 +46,8 @@
   },
   "peerDependencies": {
     "svelte": "3.x"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
