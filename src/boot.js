@@ -36,7 +36,7 @@ function configure(options) {
 }
 
 /**
- * Used on window location change (goTo or popstate)
+ * Used on window location change (goto or popstate)
  */
 function onStateChanged() {
   // location changed
@@ -76,12 +76,12 @@ function getDefaultRouter() {
 }
 
 // goes to given path
-function goToPath(path, params = {}, options = {}) {
-  goTo(compiler(path)(params), options);
+function gotoPath(path, params = {}, options = {}) {
+  goto(compiler(path)(params), options);
 }
 
 // change browser location to href
-function goTo(href, options = {}) {
+function goto(href, options = {}) {
   if (history && !options.reload) {
     // else check if we can play with history
     if (options.replaceState) {
@@ -250,6 +250,6 @@ export {
   registerRouter,
   registerRoute,
   registerLink,
-  goToPath,
-  goTo,
+  gotoPath,
+  goto,
 };

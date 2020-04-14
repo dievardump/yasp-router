@@ -2,7 +2,7 @@
   import { createEventDispatcher, onDestroy } from "svelte";
 
   import { compiler } from "../utils";
-  import { goTo, registerLink } from "../boot.js";
+  import { goto, registerLink } from "../boot.js";
 
   export let to = "/";
   export let route = "";
@@ -52,7 +52,7 @@
     }
 
     dispatch("click", event);
-    goTo(href, navigateOptions);
+    goto(href, navigateOptions);
 
     return false;
   }
