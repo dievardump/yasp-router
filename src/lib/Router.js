@@ -140,15 +140,19 @@ export default class Router {
     const route_match = this.getRouteMatch(route);
 
     if (route_match && route_match.is_matching) {
-      let match = {
-        is_matching: route_match.is_matching,
-        is_exact: route_match.is_exact || false,
-        params: route_match.params || null,
-        path: route_match.path || null,
-        location: { ...this.locationInfos },
-      };
+      // if the route was not already matching
+      // or the part of the path that match is not the same (else if makes no sens to update the route)
+      if (!route.match || route_match.path !== route.match.path) {
+        let match = {
+          is_matching: route_match.is_matching,
+          is_exact: route_match.is_exact || false,
+          params: route_match.params || null,
+          path: route_match.path || null,
+          location: { ...this.locationInfos },
+        };
 
-      route.updateMatch(match);
+        route.updateMatch(match);
+      }
     } else if (route.match) {
       // else if route was currently matching, set to false
       route.updateMatch(false);
