@@ -77,7 +77,14 @@ function getDefaultRouter() {
 
 // goes to given path
 function gotoPath(path, params = {}, options = {}) {
-  goto(compiler(path)(params), options);
+  let destination = compiler(path)(params);
+
+  // adding trailing /
+  if (destination[destination.length - 1] !== '/') {
+    destination = destination + '/';
+  }
+
+  goto(destination, options);
 }
 
 // change browser location to href
