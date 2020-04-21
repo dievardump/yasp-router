@@ -200,14 +200,18 @@ export default class Router {
     routes.forEach((route) => {
       if (route.id === match.id) {
         const route_match = match.route_match;
-        route.updateMatch({
-          is_matching: route_match.is_matching,
-          is_exact: route_match.is_exact || false,
-          path: route_match.path || null,
-          params: route_match.params || null,
-          location: { ...this.locationInfos },
-          is_fallback,
-        });
+        // if the route was not already matching
+        // or the part of the path that match is not the same (else if makes no sens to update the route)
+        if (!route.match || route_match.path !== route.match.path) {
+          route.updateMatch({
+            is_matching: route_match.is_matching,
+            is_exact: route_match.is_exact || false,
+            path: route_match.path || null,
+            params: route_match.params || null,
+            location: { ...this.locationInfos },
+            is_fallback,
+          });
+        }
       } else if (route.match) {
         route.updateMatch(false);
       }
