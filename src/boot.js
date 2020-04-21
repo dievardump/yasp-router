@@ -1,4 +1,5 @@
 import { setContext, getContext, onDestroy } from 'svelte';
+import { writable, get } from 'svelte/store';
 import { getLocationInfos, guessBasename, compiler } from './utils';
 import Router from './lib/Router';
 import Link from './lib/Link';
@@ -17,6 +18,10 @@ const namedRoutes = [];
 
 // save locationInfos
 let locationInfos = getLocationInfos();
+
+// router store updated when the location changes
+const _router = writable({ ...locationInfos });
+const router = { subscribe: _router.subscribe };
 
 // default basename for routers
 let defaultBasename = guessBasename();
@@ -42,12 +47,22 @@ function onStateChanged() {
   // location changed
   locationInfos = getLocationInfos();
 
-  // location changed
-  // triggers route matching process on all routers
-  updateRouters();
+  // update router store and routers only if any property changed
+  const { pathname, hash, search } = get(_router);
+  if (
+    pathname !== locationInfos.pathname ||
+    hash !== locationInfos.hash ||
+    search != locationInfos.search
+  ) {
+    // location changed
+    // triggers route matching process on all routers
+    updateRouters();
 
-  // go through all Link stores, and update with the new path
-  updateLinks();
+    // go through all Link stores, and update with the new path
+    updateLinks();
+
+    _router.set({ ...locationInfos });
+  }
 }
 /**
  * Go through all known routers
@@ -73,6 +88,16 @@ function getDefaultRouter() {
   }
 
   return defaultRouter;
+}
+
+// goes to given route name
+function gotoRoute(name, params = {}, options = {}) {
+  // is there a route with this name?
+  if (namedRoutes[name] && namedRoutes[name].route) {
+    gotoPath(namedRoutes[name].route, params, options);
+  } else {
+    throw new Error(`Route named [${name}] deos not exist`);
+  }
 }
 
 // goes to given path
@@ -260,6 +285,8 @@ export {
   registerRouter,
   registerRoute,
   registerLink,
+  gotoRoute,
   gotoPath,
   goto,
+  router,
 };

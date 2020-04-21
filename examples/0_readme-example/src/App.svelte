@@ -1,5 +1,14 @@
 <script>
-  import { Router, Route, Link, configure } from "yasp-router";
+  import {
+    Router,
+    Route,
+    Link,
+    configure,
+    router
+  } from "../../../src/index.js";
+
+  // console log every time the route stores changes
+  $: console.log($router);
 </script>
 
 <style>

@@ -65,7 +65,7 @@ View live there : https://svelte.dev/repl/59f64208d7584e918749ddc4c6094af6?versi
 
 ## Components & methods
 
-This package provides 3 Components and 3 methods to use
+This package provides 3 Components, 4 methods and one store to use
 
 Components :
 
@@ -76,8 +76,13 @@ Components :
 Methods:
 
 - configure
-- goTo
-- goToPath
+- goto
+- gotoPath
+- gotoRoute
+
+Store:
+
+- router
 
 ### `<Link ({to:string} or {route:string} or {action:string}) {params?:object} {navigateOptions?:object}>`
 
@@ -192,7 +197,7 @@ Allow you to set default values for all routers.
   - `forceHash` (default: false) - force links' and routes' paths to start with a `#` (add it automatically at the start of paths if not present)
   - `basename` - force the default basename used when creating a Router without `basename` property.
 
-### `goTo(href:string, options?:object)`
+### `goto(href:string, options?:object)`
 
 Navigates to the given href and triggers the Routes matching process.
 
@@ -201,9 +206,20 @@ Navigates to the given href and triggers the Routes matching process.
   - `replaceState` if true uses `history.replaceState` to change location
   - `scrollToTop` if true, calls `window.scrollTo(0, 0)` when changing location
 
-### `goToPath(path:string, params?:object, options?:object)`
+### `gotoPath(path:string, params?:object, options?:object)`
 
-Construct a new href using path and params, then calls `goTo(href, options)`.
+Construct a new href using path and params, then calls `goto(href, options)`.
+
+### `gotoRoute(name:string, params?:object, options?:object)`
+
+Look if there is a `Route` with the given name, and if yes calls `gotoPath(route.path, params, options)`
+If no route with this name exists, throws an `Error`
+
+## Store
+
+### `router`
+
+`router` is a readable store that is updated every time the `pathname`, `hash` or `search` changes because of the router (click on a `Link`, use of a `goto` method, ...)
 
 ## Other examples Shipped with this package
 

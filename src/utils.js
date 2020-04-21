@@ -75,11 +75,13 @@ function getLocationInfos() {
   // @TODO: change to make it SSR friendly?!
   const pathname = location.pathname;
   const hash = location.hash || '#'; // if hash === ''
+  const search = location.search;
   const query = queryString.parse(location.search || '');
 
   return {
     pathname,
     hash,
+    search,
     query,
   };
 }

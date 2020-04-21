@@ -1,5 +1,5 @@
 <script>
-  import { Router, Route, Link } from "yasp-router";
+  import { Router, Route, Link } from "../../../src/index.js";
   import Home from "../../components/Home.svelte";
   import About from "../../components/About.svelte";
   import Contact from "../../components/Contact.svelte";

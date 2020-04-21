@@ -25,7 +25,7 @@ directories.forEach((example_dir) => {
   });
 });
 
-const port = process.env.PORT || 3333;
+const port = process.env.PORT || 3334;
 app.listen(port, function () {
   console.log(`Connect to the page: http://localhost:${port}`);
 });

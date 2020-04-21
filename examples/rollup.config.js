@@ -22,7 +22,7 @@ directories.forEach((example_dir) => {
         svelte(),
         resolve({
           mainFields: ['svelte', 'browser', 'module', 'main'],
-          dedupe: [/svelte/],
+          dedupe: ['svelte', 'svelte/internal', 'svelte/store'],
         }),
         commonjs({ include: /node_modules/ }),
       ],
