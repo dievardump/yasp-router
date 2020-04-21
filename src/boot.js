@@ -94,7 +94,7 @@ function getDefaultRouter() {
 function gotoRoute(name, params = {}, options = {}) {
   // is there a route with this name?
   if (namedRoutes[name] && namedRoutes[name].route) {
-    gotoPath(namedRoutes[name].route, params, options);
+    gotoPath(namedRoutes[name].route.path, params, options);
   } else {
     throw new Error(`Route named [${name}] deos not exist`);
   }
