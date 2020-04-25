@@ -85,8 +85,8 @@ export default class Router {
     }
 
     // if grouped route, remove from it
+    const groups = this.groups;
     if (route.group && groups[route.group]) {
-      const groups = this.groups;
       groups[route.group].unregisterRoute(route);
       // redo group matching if not empty
       if (groups.routes.length !== 0) {
