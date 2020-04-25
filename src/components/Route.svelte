@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from "svelte";
   import { registerRoute } from "../boot.js";
 
   export let path = "";
@@ -8,6 +9,9 @@
   export let group = null;
   export let order = +Infinity;
   export let fallback = false;
+  export let dynamicComponent = false;
+
+  let localComponent = component;
 
   let routeGroup = false;
   if (group) {
@@ -39,12 +43,18 @@
     } = $$props;
     props = rest;
   }
+
+  onMount(async () => {
+    if ("function" === typeof dynamicComponent) {
+      localComponent = await dynamicComponent();
+    }
+  });
 </script>
 
 {#if $route.match}
-  {#if component}
+  {#if localComponent}
     <svelte:component
-      this={component}
+      this={localComponent}
       {routeInfos}
       match={$route.match}
       {...props}>

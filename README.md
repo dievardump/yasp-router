@@ -8,6 +8,7 @@ Router for Svelte 3
 - All matching routes render (and not only the first match)
 - Routes using URI or Hash
 - Grouped routes with fallback
+- Dynamically imported component (using a function that importss)
 - Default Router so you don't need a top-level Router
 - Several Routers can be used at the same time
 - Auto detection of basename and if path starts with a #
@@ -25,7 +26,11 @@ View live there : https://svelte.dev/repl/59f64208d7584e918749ddc4c6094af6?versi
 
 ```html
 <script>
-	import {Router, Route, Link} from 'yasp-router';
+  import {Router, Route, Link} from 'yasp-router';
+
+  async function loadAbout() {
+    return (await import('./pages/About.Svelte')).default;
+  }
 </script>
 
 <style>
@@ -58,7 +63,7 @@ View live there : https://svelte.dev/repl/59f64208d7584e918749ddc4c6094af6?versi
     </Route>
   </Route>
   <!--named route, link can point to it using route="about" -->
-  <Route path="/about" is="about">About Content</Route>
+  <Route path="/about" is="about" dynamicComponent={loadAbout}>Loading...</Route>
 </main>
 
 ```
@@ -116,15 +121,16 @@ will construct a link to `/blog/post-1`
 
 ### Parameters
 
-| Parameter   | Optional | Description                                                                   | Default |
-| ----------- | -------- | ----------------------------------------------------------------------------- | ------- |
-| `path`      |          | the path for this Route to match                                              |         |
-| `component` | optional | The component to render if the Route matches.                                 |         |
-| `exact`     | optional | if the path must be exactly matched                                           | `false` |
-| `is`        | optional | name of the route that you can use to target this route path with `Link`      |         |
-| `group`     | optional | Name of the group this route is in.                                           |         |
-| `order`     | optional | Only if in a group. Order of the Route in its group. Used to sort the routes. |         |
-| `fallback`  | optional | Only if in a group. Declare this route as group fallback if none matches in.  | `false` |
+| Parameter          | Optional | Description                                                                   | Default |
+| ------------------ | -------- | ----------------------------------------------------------------------------- | ------- |
+| `path`             |          | the path for this Route to match                                              |         |
+| `component`        | optional | The component to render if the Route matches.                                 |         |
+| `dynamicComponent` | optional | A function that will dynamically load the component (returns a promise)       |         |
+| `exact`            | optional | if the path must be exactly matched                                           | `false` |
+| `is`               | optional | name of the route that you can use to target this route path with `Link`      |         |
+| `group`            | optional | Name of the group this route is in.                                           |         |
+| `order`            | optional | Only if in a group. Order of the Route in its group. Used to sort the routes. |         |
+| `fallback`         | optional | Only if in a group. Declare this route as group fallback if none matches in.  | `false` |
 
 > Any prop given to Route not part of the parameters listed here will be added to to the `component` using `{...props}` (or to the slot using `{props}` and accessible with `let:props`).
 
