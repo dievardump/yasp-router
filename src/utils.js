@@ -73,8 +73,18 @@ const parser_to_end = routeParser({
  */
 function getLocationInfos() {
   // @TODO: change to make it SSR friendly?!
-  const pathname = location.pathname;
-  const hash = location.hash || '#'; // if hash === ''
+  let pathname = location.pathname;
+  // add trailing / to pathname
+  if (pathname[pathname.length - 1] !== '/') {
+    pathname += '/';
+  }
+
+  let hash = location.hash || '#/'; // if hash === ''
+  // add trailing / to hash
+  if (hash[hash.length - 1] !== '/') {
+    hash += '/';
+  }
+
   const search = location.search;
   const query = queryString.parse(location.search || '');
 
