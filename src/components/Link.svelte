@@ -1,33 +1,33 @@
 <script>
-  import { createEventDispatcher, onDestroy } from "svelte";
+  import { createEventDispatcher, onDestroy } from 'svelte';
 
-  import { compiler } from "../utils";
-  import { goto, registerLink } from "../boot.js";
+  import { compiler } from '../utils';
+  import { goto, registerLink } from '../boot.js';
 
-  export let to = "/";
-  export let route = "";
+  export let to = '/';
+  export let route = '';
   export let action = null;
   export let params = {};
   export let navigateOptions = {};
 
   let setted = 0;
-  ["to", "route", "action"].forEach(name => {
+  ['to', 'route', 'action'].forEach((name) => {
     if (!!$$props[name]) setted++;
   });
 
   if (setted < 1) {
     throw new Error(
-      "Link must have either a to, a route or an action specified"
+      'Link must have either a to, a route or an action specified'
     );
   } else if (setted > 1) {
     throw new Error(
-      "Link can only have one of to, route or action specified at the same time"
+      'Link can only have one of to, route or action specified at the same time'
     );
   }
 
   let props = {};
   let localProps = {};
-  let href = "";
+  let href = '';
 
   let store = null;
   if (!action) {
@@ -38,20 +38,22 @@
 
   const dispatch = createEventDispatcher();
 
-  // handle click
   // dispatch the click event
+  // handle click
   // and go to href
   function onClickHandler(event) {
+    // dispatch click first
+    dispatch('click', event);
+
     if (action !== null && window.history && window.history.length) {
-      if (action === "back") window.history.back();
-      else if (action === "forward") window.history.forward();
-      else if (action === "go" && params.go) {
+      if (action === 'back') window.history.back();
+      else if (action === 'forward') window.history.forward();
+      else if (action === 'go' && params.go) {
         window.history.go(params.go);
       }
       return;
     }
 
-    dispatch("click", event);
     goto(href, navigateOptions);
 
     return false;
@@ -63,8 +65,8 @@
 
     if (store.active) {
       localProps = {
-        "aria-current": "page",
-        "data-active": "active"
+        'aria-current': 'page',
+        'data-active': 'active',
       };
     } else {
       localProps = {};
